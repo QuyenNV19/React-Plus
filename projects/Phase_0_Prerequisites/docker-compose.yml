@@ -1,0 +1,44 @@
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ports:
+      - "9200:9200"
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+
+  api:
+    build: .
+    container_name: search_api
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/
+      - ES_HOST=http://elasticsearch:9200
+      - TRANSFORMERS_CACHE=/app/.cache/huggingface
+      - SENTENCE_TRANSFORMERS_HOME=/app/.cache/torch_sentence_transformers
+    volumes:
+      - .:/app
+      - hf_cache:/app/.cache/huggingface
+      - model_cache:/app/.cache/torch_sentence_transformers
+    depends_on:
+      - mongodb
+      - elasticsearch
+
+volumes:
+  mongodb_data:
+  es_data:
+  hf_cache:
+  model_cache:
