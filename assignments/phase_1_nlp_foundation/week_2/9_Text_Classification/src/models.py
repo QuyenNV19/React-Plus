@@ -1,8 +1,3 @@
-"""
-Model Training Module
-Handles training and management of classification models.
-"""
-
 import time
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import MultinomialNB
@@ -16,7 +11,7 @@ class ModelTrainer:
         self.training_times = {}
     
     def train_logistic_regression(self, X_train: sp.csr_matrix, y_train, 
-                                  max_iter: int = 1000, C: float = 1.0,
+                                  max_iter: int = 100, C: float = 1.0,
                                   solver: str = 'lbfgs') -> Tuple:
         start_time = time.time()
         
@@ -32,7 +27,6 @@ class ModelTrainer:
         self.models['logistic_regression'] = lr_model
         self.training_times['logistic_regression'] = training_time
         
-        print(f"Logistic Regression trained in {training_time:.4f} seconds")
         return lr_model, training_time
     
     def train_naive_bayes(self, X_train: sp.csr_matrix, y_train,
@@ -46,7 +40,6 @@ class ModelTrainer:
         self.models['naive_bayes'] = nb_model
         self.training_times['naive_bayes'] = training_time
         
-        print(f"Naive Bayes trained in {training_time:.4f} seconds")
         return nb_model, training_time
     
     def get_model(self, model_name: str):

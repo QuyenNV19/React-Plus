@@ -1,8 +1,3 @@
-"""
-Text Classification Package
-Multilingual sentiment analysis with BoW and TF-IDF representations.
-"""
-
 from .dataset import DatasetManager
 from .preprocessing import TextPreprocessor
 from .feature_extraction import FeatureExtractor
@@ -15,6 +10,4 @@ __all__ = [
     'FeatureExtractor',
     'ModelTrainer',
     'ModelEvaluator'
-]
-
-assignments\phase_1_nlp_foundation\week_2\9_Text Classification
+]

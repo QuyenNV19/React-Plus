@@ -14,7 +14,7 @@ NGRAM_RANGE = (1, 1)
 MIN_DF = 1  
 MAX_DF = 1.0  
 # Model Training Configuration
-LR_MAX_ITER = 1000  
+LR_MAX_ITER = 10  
 LR_C = 1.0  
 LR_SOLVER = 'lbfgs'  
 

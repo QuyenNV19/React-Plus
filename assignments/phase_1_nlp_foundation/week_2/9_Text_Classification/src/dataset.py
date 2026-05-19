@@ -9,8 +9,6 @@ class DatasetManager:
         
     def load_dataset(self) -> DatasetDict:
         self.ds = load_dataset(self.dataset_name)
-        print(f"Loaded {self.dataset_name}")
-        print(f"Original sizes - Train: {len(self.ds['train'])}, Test: {len(self.ds['test'])}")
         return self.ds
     
     def filter_by_language(self, language: str = 'en') -> DatasetDict:
@@ -28,9 +26,6 @@ class DatasetManager:
             'train': ds_train_filtered,
             'test': ds_test_filtered
         })
-        
-        print(f"\nFiltered to {language.upper()}")
-        print(f"Filtered sizes - Train: {len(self.ds['train'])}, Test: {len(self.ds['test'])}")
         return self.ds
     
     def get_train_test_data(self) -> Tuple[List[str], List[int], List[str], List[int]]:

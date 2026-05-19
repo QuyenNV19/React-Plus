@@ -1,4 +1,3 @@
-
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from typing import List, Tuple
 import scipy.sparse as sp
@@ -28,8 +27,6 @@ class FeatureExtractor:
     def fit_transform_bow(self, train_texts: List[str], test_texts: List[str]) -> Tuple:
         self.X_train_bow = self.vectorizer.fit_transform(train_texts)
         self.X_test_bow = self.vectorizer.transform(test_texts)
-        
-        print(f"BoW shape: {self.X_train_bow.shape}")
         return self.X_train_bow, self.X_test_bow
     
     def fit_transform_tfidf(self) -> Tuple:
@@ -38,8 +35,6 @@ class FeatureExtractor:
         
         self.X_train_tfidf = self.tfidf_transformer.fit_transform(self.X_train_bow)
         self.X_test_tfidf = self.tfidf_transformer.transform(self.X_test_bow)
-        
-        print(f"TF-IDF shape: {self.X_train_tfidf.shape}")
         return self.X_train_tfidf, self.X_test_tfidf
     
     def get_features(self, feature_type: str = 'tfidf') -> Tuple:
